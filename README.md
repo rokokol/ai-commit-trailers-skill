@@ -23,26 +23,29 @@ Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is
 
 The head of every line is exactly what nixpkgs demands — tool name, model name and version — so the suffix costs nothing where the policy is strictest. `(mostly)` / `(partly)` are mine; no upstream grades `Assisted-by` itself, so that resolution has to be invented or done without
 
-Two boundaries decide most cases. Judge by the **final diff**, not by who typed first: a block the agent proposed and I rewrote is mine. And **reviewing is not editing**: a change I read and took unchanged stays `Generated-by`
+What decides the state is **whose answer a reviewer would get to "why is it done this way"** — not who typed the lines, and not how large the diff is. Code is a stack of decisions; whoever made them made the change. So curating in prose is steering, until it gets specific enough that nothing is left for the agent to decide — then it is dictation, and dictation discloses nothing. A question counts only if the outcome moved because of it, and reviewing is not editing
 
 ## Install
 
 ```bash
-npx skills add rokokol/ai-disclosure-skill
+npx skills add -g rokokol/ai-commit-trailers    # for you, everywhere
+npx skills add rokokol/ai-commit-trailers       # for the project you are standing in
 ```
 
-or as a Claude Code plugin:
+Without `-g` it installs into the directory you are standing in — handy for a repository whose policy differs, wrong if you meant it for yourself. Either way the files land in `.agents/skills/` and are symlinked into every agent found on the machine
+
+Claude Code also takes it as a plugin:
 
 ```
-/plugin marketplace add rokokol/ai-disclosure-skill
-/plugin install ai-disclosure@rokokol-skills
+/plugin marketplace add rokokol/ai-commit-trailers
+/plugin install ai-commit-trailers@rokokol-skills
 ```
 
-or by hand — clone into any skills directory:
+or by hand — clone into whichever skills directory your agent reads:
 
 ```bash
-git clone https://github.com/rokokol/ai-disclosure-skill \
-  ~/.claude/skills/ai-disclosure
+git clone https://github.com/rokokol/ai-commit-trailers \
+  ~/.claude/skills/ai-commit-trailers
 ```
 
 ## What it does

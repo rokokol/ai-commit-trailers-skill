@@ -1,12 +1,12 @@
 ---
-name: ai-disclosure
-description: "How AI involvement is disclosed in commits — the Assisted-by trailer, what each upstream project requires, and a CONTRIBUTING template that states the policy. Use when writing or reviewing a CONTRIBUTING/AI policy, before the first commit to a third-party repo, when a repo's rules on AI contributions are unclear, when deciding whether a commit needs a trailer, or when asked about Co-authored-by / Signed-off-by / Generated-by."
+name: ai-commit-trailers
+description: "How AI involvement is disclosed in commits — the Assisted-by and Generated-by trailers, which state a given commit falls into, what each upstream project requires, and a CONTRIBUTING template that states the policy. Use when writing or reviewing a CONTRIBUTING/AI policy, before the first commit to a third-party repo, when a repo's rules on AI contributions are unclear, when unsure which trailer a commit deserves — curated in prose, questions that changed the outcome, dictated work — or when asked about Co-authored-by / Signed-off-by / Generated-by."
 license: MIT
 ---
 
 # AI disclosure in commits
 
-The trailer that answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". The daily rule lives in the global CLAUDE.md; this file is the reasoning behind it, the upstream texts it rests on, and the template.
+The trailer that answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". Keep the rule itself in whatever file your agent always reads; this one holds the reasoning behind it, the upstream texts it rests on, and the template.
 
 ## The rule
 
@@ -17,17 +17,31 @@ Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is mine
 <no trailer>                                      # the user's own work, mechanical, or dictated
 ```
 
-Judge by the final diff, not by who typed first. A block I proposed and the user rewrote is theirs. One trailer per commit. Torn between two states — take the lower one.
-
-The line between the top two is the user's hand, not a percentage: they set the task and took the result as it came → `Generated-by`; they steered it, corrected a direction, rewrote a part → `Assisted-by (mostly)`. Reviewing and approving is not editing — a commit they read and accepted unchanged stays `Generated-by`.
+One trailer per commit. Torn between two states — take the lower one.
 
 `Generated-by` is Mesa's, for "almost all the code was generated". `(mostly)` / `(partly)` are ours: no upstream grades `Assisted-by` itself. The head of every line is what nixpkgs demands, so the suffix costs nothing where the policy is strictest.
 
-## What gets no trailer
+## Which state
 
-Mechanical work: a formatter run, a rename swept with grep, boilerplate the user would have written the same way. Dictated work too — when they made every decision and I only typed, there is no assistance to disclose. nixpkgs exempts the first kind in as many words; the dictation case follows the same logic rather than their letter.
+The test is **whose answer a reviewer would get to "why is it done this way"** — not who typed the lines. Code is a stack of decisions: what structure, where the boundary falls, what happens on the empty input. Whoever made those made the change; typing them out is the cheap half.
 
-The point of the exemptions is that the trailer stays a signal. A log where every commit carries one says nothing about any of them.
+So the diff is a rough proxy, and only for the ordinary case. Under close curation it reads as entirely mine while half the thinking was the user's, and grading by volume would call that `(mostly)` when it is nearer to no trailer at all.
+
+| The user… | State |
+|---|---|
+| set the task, read the result, took it unchanged | `Generated-by` |
+| steered in prose — a direction, a rejected approach, "not like that, rather…" | `Assisted-by (mostly)` |
+| wrote or rewrote a substantial part themselves | `Assisted-by (partly)` |
+| dictated it, or curated so closely that nothing was left for me to decide | no trailer |
+| ran a formatter, swept a rename with grep | no trailer |
+
+**Curation in prose is steering, not dictation** — until it stops leaving me decisions. Direction, structure, approach and edge handling all specified means I transcribed rather than designed, and that is dictation at a higher altitude: no trailer, same as line-by-line.
+
+**A question moves the state only if the diff moved because of it.** "What does this line do" changes nothing. "Sure that survives an empty input?" sends me checking and fixing — that is a correction phrased as a question, and it steers. Grammar is not the signal; whether the commit came out different is.
+
+**Reviewing and accepting is not editing.** A change read and taken unchanged stays `Generated-by` — otherwise the tag would never apply to anything worth committing.
+
+The two rows that get no trailer are the ones the exemptions rest on. nixpkgs excuses deterministic tooling and rote boilerplate in as many words; the dictation row follows the same logic rather than their letter, since a decision the user made is not assistance to disclose. Both exist so the trailer stays a signal — a log where every commit carries one says nothing about any of them.
 
 ## Never
 

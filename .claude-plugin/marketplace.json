@@ -7,20 +7,20 @@
   },
   "plugins": [
     {
-      "name": "ai-disclosure",
+      "name": "ai-commit-trailers",
       "source": "./",
       "description": "Disclose an agent's share of a commit with Assisted-by / Generated-by, the way nixpkgs, the kernel, Mesa and LLVM ask for it",
       "version": "0.1.0",
       "author": {
         "name": "rokokol"
       },
-      "homepage": "https://github.com/rokokol/ai-disclosure-skill",
+      "homepage": "https://github.com/rokokol/ai-commit-trailers",
       "license": "MIT",
       "category": "workflow",
       "keywords": [
         "git",
         "commit-trailers",
-        "ai-disclosure",
+        "ai-commit-trailers",
         "assisted-by",
         "generated-by",
         "contributing"
