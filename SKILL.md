@@ -17,7 +17,7 @@ Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is mine
 <no trailer>                                      # the user's own work, mechanical, or dictated
 ```
 
-One trailer per commit. Torn between two states — take the lower one.
+One trailer per commit. Torn between two states — take the lower one; where the case is genuinely unclear, drop the suffix and write a bare `Assisted-by`. That much is true of any commit worth arguing about, which a guessed degree is not.
 
 `Generated-by` is Mesa's, for "almost all the code was generated". `(mostly)` / `(partly)` are ours: no upstream grades `Assisted-by` itself. The head of every line is what nixpkgs demands, so the suffix costs nothing where the policy is strictest.
 
