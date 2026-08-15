@@ -4,7 +4,7 @@ Teaches an agent to disclose its own share of a commit, and to read a repository
 
 This is one person's convention, not a neutral survey: it says what I ask an agent to write in my repositories, and why. The upstream requirements it rests on are quoted verbatim with links, so the parts that are load-bearing are checkable and the parts that are mine are visible as mine
 
-No script, no dependencies: one `SKILL.md`
+No script, no dependencies: `SKILL.md` plus two `references/` files an agent loads only when the task calls for them — the upstream comparison table and the CONTRIBUTING template
 
 ## Why
 

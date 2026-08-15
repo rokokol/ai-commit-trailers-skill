@@ -50,18 +50,7 @@ The two rows that get no trailer are the ones the exemptions rest on. nixpkgs ex
 
 ## What upstreams actually require
 
-| Project | Requirement |
-|---|---|
-| **nixpkgs** | `Assisted-by:` **mandatory** for LLM tooling, "including at least the tool name and the primary model name and version". `Co-authored-by:` explicitly "does not satisfy this policy". Violations are treated under the CoC clause on LLM spam |
-| **Linux kernel** | `Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL...]`. AI **must not** add `Signed-off-by` — only humans certify the DCO. In `Documentation/process/coding-assistants.rst` since 7.0 |
-| **Mesa** | Two tags by degree: `Assisted-by: TOOL (MODEL)` when AI made decisions or wrote parts, `Generated-by:` when almost all of it is generated. "Do not use the `Co-authored-by` tag as this one is reserved for human co-authors" |
-| **LLVM** | Disclosure mandatory for "substantial amounts of tool-generated content", `Assisted-by:` recommended as the form. Covers RFCs, issues and review comments, not just code |
-
-nixpkgs is the strictest of the four, so a commit shaped to satisfy it satisfies the rest. Its exemptions: deterministic editor/IDE/formatter tooling reviewed by the author, and rote LLM auto-completion of boilerplate "the author would have written anyway".
-
-**Where a project names one tag, use theirs, not ours.** nixpkgs mandates `Assisted-by` and counts nothing else, so a commit going there carries `Assisted-by (mostly)` even where it would be `Generated-by` in our own repositories. Mesa is the reverse: send them `Generated-by` when that is what it is.
-
-Sources: [nixpkgs CONTRIBUTING](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) · [kernel](https://docs.kernel.org/process/coding-assistants.html) · [Mesa](https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/docs/submittingpatches.rst) · [LLVM](https://llvm.org/docs/AIToolPolicy.html) · [the original proposal](https://xeiaso.net/notes/2025/assisted-by-footer/)
+nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — `references/upstream-requirements.md`. **Load it before the first commit to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic.
 
 ## Reading the log
 
@@ -74,24 +63,7 @@ git log --invert-grep --grep='Assisted-by' --grep='Generated-by' --oneline   # t
 
 ## CONTRIBUTING template
 
-For a solo repo of the user's. Keep it short — a policy nobody finishes reading is not a policy. Adjust the project name and drop the second paragraph if the repo takes no outside patches yet.
-
-```markdown
-# Contributing
-
-## AI assistance
-
-Parts of this repository are written with AI assistance, and that is disclosed per commit. A commit whose diff is substantially machine-written carries a trailer naming the tool and the model:
-
-    Generated-by: Claude Code:claude-opus-5
-    Assisted-by: Claude Code:claude-opus-5 (mostly)
-
-`Generated-by:` means the task was carried out without a hand in it — set, reviewed, accepted as it came. `Assisted-by:` means it was steered: `(mostly)` when most of the final diff came from the tool, `(partly)` when a substantial part did. Commits without a trailer are hand-written, dictated line by line, or mechanical — a formatter run or a rename swept with grep.
-
-The same is expected of contributions. Disclose the tool and model you used, in a trailer or in the pull request description. Do not use `Co-authored-by:` for a tool — it is reserved for human co-authors, and it is not accepted as disclosure by [nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), [Mesa](https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/docs/submittingpatches.rst) or the [kernel](https://docs.kernel.org/process/coding-assistants.html). Never sign off on a tool's behalf.
-
-Whoever opens the pull request is responsible for it. Review what the tool wrote, understand it, and be ready to answer questions about it without forwarding them back to the tool.
-```
+A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTING.md` — states the trailer rule, the `Co-authored-by` refusal and the review expectation in a form a contributor actually finishes reading. Full template — `references/contributing-template.md`. **Load it when writing or reviewing a repo's `CONTRIBUTING.md` or AI policy.**
 
 ## Contributing to someone else's repo
 
