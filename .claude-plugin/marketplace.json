@@ -9,7 +9,7 @@
     {
       "name": "ai-commit-trailers",
       "source": "./",
-      "description": "Disclose an agent's share of a commit with Assisted-by / Generated-by, the way nixpkgs, the kernel, Mesa and LLVM ask for it",
+      "description": "Handle AI disclosure for commits and repository contributions, omit session links, and require user review before publication",
       "version": "0.1.0",
       "author": {
         "name": "rokokol"
@@ -23,7 +23,10 @@
         "ai-commit-trailers",
         "assisted-by",
         "generated-by",
-        "contributing"
+        "contributing",
+        "pull-requests",
+        "issues",
+        "comments"
       ]
     }
   ]

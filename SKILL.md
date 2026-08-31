@@ -1,12 +1,30 @@
 ---
 name: ai-commit-trailers
-description: "How AI involvement is disclosed in commits — the Assisted-by and Generated-by trailers, which state a given commit falls into, what each upstream project requires, and a CONTRIBUTING template that states the policy. Use when writing or reviewing a CONTRIBUTING/AI policy, before the first commit to a third-party repo, when a repo's rules on AI contributions are unclear, when unsure which trailer a commit deserves — curated in prose, questions that changed the outcome, dictated work — or when asked about Co-authored-by / Signed-off-by / Generated-by."
+description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, no AI session links, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by."
 license: MIT
 ---
 
-# AI disclosure in commits
+# AI disclosure in repository contributions
 
-The trailer that answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". Keep the rule itself in whatever file your agent always reads; this one holds the reasoning behind it, the upstream texts it rests on, and the template.
+For commits, the trailer answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". The safety rules below also apply to pushes, issues, pull requests, reviews, comments, discussions, and any other action performed under the user's identity. Keep the rule itself in whatever file your agent always reads; this one holds the reasoning behind it, the upstream texts it rests on, and the template.
+
+## Before sending anything as the user
+
+Never push, open or update an issue or pull request, submit a review, post a comment or discussion, or perform another externally visible action under the user's identity without a final, explicit confirmation immediately before the action.
+
+1. Show the user exactly what will be published, including the destination and all relevant metadata. For a push, include the ref and commits; for an issue, pull request, review, comment, or discussion, include the exact title and body as applicable.
+2. Explicitly ask the user to review it personally. Do not describe tool output, tests, or an agent's review as a substitute for their own inspection.
+3. Ask whether to proceed, and wait for an unambiguous approval. A request made earlier in the task is not the final approval required by this rule.
+
+Do not batch approval for multiple submissions. If the content or destination changes after approval, show the revised payload and ask again.
+
+Local commits are the narrow exception: apply the disclosure rules and inspect the staged diff and proposed message, but do not ask for a separate confirmation before running `git commit` when the user has requested a commit. History-rewriting actions such as `git commit --amend` or rebase require an explicit request for that action; when the user has already made that explicit request, do not ask for duplicate confirmation.
+
+## No AI session links
+
+Never add an AI chat or coding-session URL, session identifier, transcript link, share link, or similar session reference to a commit message, issue, pull request, review, comment, discussion, or other submission. This includes `Claude-Session:` lines and URLs such as `https://claude.ai/code/session_...`, as well as equivalent links from other tools.
+
+When disclosure is required, name only the tool and model in the form required by the repository. Do not use a session link as provenance or proof. If a draft already contains a session reference, remove it and call out that removal when presenting the draft for the user's review.
 
 ## The rule
 
@@ -50,7 +68,7 @@ The two rows that get no trailer are the ones the exemptions rest on. nixpkgs ex
 
 ## What upstreams actually require
 
-nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — `references/upstream-requirements.md`. **Load it before the first commit to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic.
+nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — `references/upstream-requirements.md`. **Load it before every contribution to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic.
 
 ## Reading the log
 
@@ -67,4 +85,4 @@ A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTI
 
 ## Contributing to someone else's repo
 
-Read their `CONTRIBUTING` before the first commit — it overrides everything above. Check for `CONTRIBUTING.md`, `.github/CONTRIBUTING.md`, `docs/`, and the `CODE_OF_CONDUCT`. Where a project has no policy, the nixpkgs form is the safe default: it satisfies everyone who does have one.
+Re-check the relevant repository policy before every commit, issue, pull request, review, comment, discussion, or other interaction. The repository's contribution and disclosure requirements override the trailer convention above, but never the ban on session links or the requirement for the user's personal review and final approval. Check for `CONTRIBUTING.md`, `.github/CONTRIBUTING.md`, `docs/`, issue and pull request templates, and the `CODE_OF_CONDUCT`. Where a project has no policy, the nixpkgs form is the safe default for commits: it satisfies everyone who does have one.

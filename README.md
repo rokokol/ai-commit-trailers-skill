@@ -1,6 +1,6 @@
 # AI disclosure skill
 
-Teaches an agent to disclose its own share of a commit, and to read a repository's policy before its first commit there rather than after.
+Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, omit links to AI sessions, and require the user's personal review and explicit approval before publishing under their identity.
 
 This is one person's convention, not a neutral survey: it says what I ask an agent to write in my repositories, and why. The upstream requirements it rests on are quoted verbatim with links, so the parts that are load-bearing are checkable and the parts that are mine are visible as mine
 
@@ -50,6 +50,8 @@ git clone https://github.com/rokokol/ai-commit-trailers \
 
 ## What it does
 
+- **Requires approval before publication.** Before a push, issue, pull request, review, comment, discussion, or similar externally visible action, the agent shows the exact payload, asks the user to inspect it personally, and waits for explicit final approval. Local commits are exempt; amendments and other history rewrites require an explicit request
+- **Never publishes AI session links.** Disclosure names the tool and model without `Claude-Session:` lines, coding-session URLs, transcript links, share links, or equivalent session references from other tools
 - **Quotes what each project requires** — nixpkgs, the Linux kernel, Mesa, LLVM — with the exact wording and a link. Where a project names a tag, theirs wins over the convention above: nixpkgs counts nothing but `Assisted-by`, so a fully generated commit still goes there as `Assisted-by`
 - **Names the two absolutes.** Never `Co-authored-by` for a tool; never `Signed-off-by` on its behalf — only a human can certify the DCO
 - **Says what needs no trailer.** Formatter runs, grep-swept renames, dictated changes. nixpkgs exempts deterministic tooling and rote completion explicitly; the point is that the trailer stays a signal, and a log where every commit carries one says nothing about any of them
