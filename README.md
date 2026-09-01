@@ -28,8 +28,8 @@ What decides the state is **whose answer a reviewer would get to "why is it done
 ## Install
 
 ```bash
-npx skills add -g rokokol/ai-commit-trailers    # for you, everywhere
-npx skills add rokokol/ai-commit-trailers       # for the project you are standing in
+npx skills add -g rokokol/ai-commit-trailers-skill    # for you, everywhere
+npx skills add rokokol/ai-commit-trailers-skill       # for the project you are standing in
 ```
 
 Without `-g` it installs into the directory you are standing in — handy for a repository whose policy differs, wrong if you meant it for yourself. Either way the files land in `.agents/skills/` and are symlinked into every agent found on the machine
@@ -37,14 +37,14 @@ Without `-g` it installs into the directory you are standing in — handy for a 
 Claude Code also takes it as a plugin:
 
 ```
-/plugin marketplace add rokokol/ai-commit-trailers
+/plugin marketplace add rokokol/ai-commit-trailers-skill
 /plugin install ai-commit-trailers@rokokol-skills
 ```
 
 or by hand — clone into whichever skills directory your agent reads:
 
 ```bash
-git clone https://github.com/rokokol/ai-commit-trailers \
+git clone https://github.com/rokokol/ai-commit-trailers-skill \
   ~/.claude/skills/ai-commit-trailers
 ```
 
