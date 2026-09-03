@@ -1,10 +1,30 @@
+<div align="center">
+
 # AI disclosure skill
 
-Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, omit links to AI sessions, and require the user's personal review and explicit approval before publishing under their identity.
+**Say what made the commit, and never publish under someone's name without asking (｡•̀ᴗ-)✧**
+
+![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat&logo=anthropic&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![no dependencies](https://img.shields.io/badge/dependencies-none-3DA639?style=flat)
+[![license](https://img.shields.io/badge/MIT-3DA639?style=flat)](LICENSE)
+
+</div>
+
+Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, omit links to AI sessions, and require the user's personal review and explicit approval before publishing under their identity
 
 This is one person's convention, not a neutral survey: it says what I ask an agent to write in my repositories, and why. The upstream requirements it rests on are quoted verbatim with links, so the parts that are load-bearing are checkable and the parts that are mine are visible as mine
 
 No script, no dependencies: `SKILL.md` plus two `references/` files an agent loads only when the task calls for them — the upstream comparison table and the CONTRIBUTING template
+
+## Contents
+
+- [Why](#why)
+- [The convention](#the-convention)
+- [Install](#install)
+- [What it does](#what-it-does)
+- [Taking it further](#taking-it-further)
+- [What it is not](#what-it-is-not)
 
 ## Why
 
@@ -48,6 +68,9 @@ git clone https://github.com/rokokol/ai-commit-trailers-skill \
   ~/.claude/skills/ai-commit-trailers
 ```
 
+> [!NOTE]
+> A skill has no version to pin — it is read at whatever revision you have checked out, so `git pull` is the whole upgrade path
+
 ## What it does
 
 - **Requires approval before publication.** Before a push, issue, pull request, review, comment, discussion, or similar externally visible action, the agent shows the exact payload, asks the user to inspect it personally, and waits for explicit final approval. Local commits are exempt; amendments and other history rewrites require an explicit request
@@ -64,7 +87,3 @@ If you disagree with the grading, the parts worth keeping are the upstream table
 ## What it is not
 
 Not a legal opinion, and not a licensing or copyright analysis — attribution practice only. Not an enforcement mechanism either: nothing inspects a diff to decide how much of it was generated. That judgement stays with whoever writes the commit, which is the point every one of these policies makes
-
-## License
-
-MIT
