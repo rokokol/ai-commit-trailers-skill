@@ -12,7 +12,7 @@
 
 </div>
 
-Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, omit links to AI sessions, and require the user's personal review and explicit approval before publishing under their identity
+Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, and require the user's personal review and explicit approval before publishing under their identity — with the tool's own byline and session links switched off in settings rather than argued about in the prompt
 
 This is one person's convention, not a neutral survey: it says what I ask an agent to write in my repositories, and why. The upstream requirements it rests on are quoted verbatim with links, so the parts that are load-bearing are checkable and the parts that are mine are visible as mine
 
@@ -23,6 +23,7 @@ No script, no dependencies: `SKILL.md` plus two `references/` files an agent loa
 - [Why](#why)
 - [The convention](#the-convention)
 - [Install](#install)
+- [Turning the tool's own byline off](#turning-the-tools-own-byline-off)
 - [What it does](#what-it-does)
 - [Tests](#tests)
 - [Taking it further](#taking-it-further)
@@ -73,10 +74,36 @@ git clone https://github.com/rokokol/ai-commit-trailers-skill \
 > [!NOTE]
 > A skill has no version to pin — it is read at whatever revision you have checked out, so `git pull` is the whole upgrade path
 
+## Turning the tool's own byline off
+
+Claude Code appends attribution of its own to commit messages and pull request descriptions, and from a web or Remote Control session a `claude.ai` session link with it. That is the opposite of the convention above: the disclosure belongs in a trailer written into the message, in the form the receiving project asks for, and a session link resolves for one account and is dead text to every other reader. Turn the defaults off in `settings.json` and the omission becomes configuration instead of something a person has to remember while writing a pull request — which is why this is a setup step here rather than a rule in `SKILL.md`
+
+```json
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}
+```
+
+| Field | Effect |
+| --- | --- |
+| `commit` | Text appended to every commit message. `""` hides it; any other string replaces the default wholesale, so a project that wants its own wording puts it here |
+| `pr` | The same, for pull request descriptions |
+| `sessionUrl` | `false` omits the `Claude-Session:` trailer and the PR-body session link that web and Remote Control sessions otherwise add. Defaults to `true` |
+
+`includeCoAuthoredBy: false` is the deprecated predecessor. It still works and still removes the `Co-authored-by` line, but it does not cover the session link
+
+Which file decides the scope, later overriding earlier: `~/.claude/settings.json` for every project on the machine, `.claude/settings.json` committed in a repository to hold its contributors to the same behaviour, `.claude/settings.local.json` for that repository without committing it
+
+Emptying these fields removes only what the tool writes by itself. The trailer this skill asks for is composed into the message deliberately and is untouched — one disclosure, chosen, in the form the project wants. `git log -1 --format=%B` shows what actually landed
+
 ## What it does
 
 - **Requires approval before publication.** Before a push, issue, pull request, review, comment, discussion, or similar externally visible action, the agent shows the exact payload, asks the user to inspect it personally, and waits for explicit final approval. Local commits are exempt; amendments and other history rewrites require an explicit request
-- **Never publishes AI session links.** Disclosure names the tool and model without `Claude-Session:` lines, coding-session URLs, transcript links, share links, or equivalent session references from other tools
+- **Keeps session links and tool bylines out of what gets published.** Disclosure names the tool and model and nothing else; the `attribution` settings above stop Claude Code from appending a `Claude-Session:` line, a coding-session URL or a "generated with" byline to a message or a pull request body, and this repository's own gate proves none crept in
 - **Quotes what each project requires** — nixpkgs, the Linux kernel, Mesa, LLVM — with the exact wording and a link. Where a project names a tag, theirs wins over the convention above: nixpkgs counts nothing but `Assisted-by`, so a fully generated commit still goes there as `Assisted-by`
 - **Names the two absolutes.** Never `Co-authored-by` for a tool; never `Signed-off-by` on its behalf — only a human can certify the DCO
 - **Says what needs no trailer.** Formatter runs, grep-swept renames, dictated changes. nixpkgs exempts deterministic tooling and rote completion explicitly; the point is that the trailer stays a signal, and a log where every commit carries one says nothing about any of them

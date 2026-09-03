@@ -1,6 +1,6 @@
 ---
 name: ai-commit-trailers
-description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, no AI session links, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by."
+description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by."
 license: MIT
 ---
 
@@ -19,12 +19,6 @@ Never push, open or update an issue or pull request, submit a review, post a com
 Do not batch approval for multiple submissions. If the content or destination changes after approval, show the revised payload and ask again.
 
 Local commits are the narrow exception: apply the disclosure rules and inspect the staged diff and proposed message, but do not ask for a separate confirmation before running `git commit` when the user has requested a commit. History-rewriting actions such as `git commit --amend` or rebase require an explicit request for that action; when the user has already made that explicit request, do not ask for duplicate confirmation.
-
-## No AI session links
-
-Never add an AI chat or coding-session URL, session identifier, transcript link, share link, or similar session reference to a commit message, issue, pull request, review, comment, discussion, or other submission. This includes `Claude-Session:` lines and URLs such as `https://claude.ai/code/session_...`, as well as equivalent links from other tools.
-
-When disclosure is required, name only the tool and model in the form required by the repository. Do not use a session link as provenance or proof. If a draft already contains a session reference, remove it and call out that removal when presenting the draft for the user's review.
 
 ## The rule
 
@@ -85,4 +79,4 @@ A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTI
 
 ## Contributing to someone else's repo
 
-Re-check the relevant repository policy before every commit, issue, pull request, review, comment, discussion, or other interaction. The repository's contribution and disclosure requirements override the trailer convention above, but never the ban on session links or the requirement for the user's personal review and final approval. Check for `CONTRIBUTING.md`, `.github/CONTRIBUTING.md`, `docs/`, issue and pull request templates, and the `CODE_OF_CONDUCT`. Where a project has no policy, the nixpkgs form is the safe default for commits: it satisfies everyone who does have one.
+Re-check the relevant repository policy before every commit, issue, pull request, review, comment, discussion, or other interaction. The repository's contribution and disclosure requirements override the trailer convention above, but never the requirement for the user's personal review and final approval. Check for `CONTRIBUTING.md`, `.github/CONTRIBUTING.md`, `docs/`, issue and pull request templates, and the `CODE_OF_CONDUCT`. Where a project has no policy, the nixpkgs form is the safe default for commits: it satisfies everyone who does have one.
