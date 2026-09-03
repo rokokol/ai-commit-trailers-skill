@@ -8,6 +8,7 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 ![no dependencies](https://img.shields.io/badge/dependencies-none-3DA639?style=flat)
 [![license](https://img.shields.io/badge/MIT-3DA639?style=flat)](LICENSE)
+[![ci](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/ci.yml)
 
 </div>
 
@@ -23,6 +24,7 @@ No script, no dependencies: `SKILL.md` plus two `references/` files an agent loa
 - [The convention](#the-convention)
 - [Install](#install)
 - [What it does](#what-it-does)
+- [Tests](#tests)
 - [Taking it further](#taking-it-further)
 - [What it is not](#what-it-is-not)
 
@@ -79,6 +81,16 @@ git clone https://github.com/rokokol/ai-commit-trailers-skill \
 - **Names the two absolutes.** Never `Co-authored-by` for a tool; never `Signed-off-by` on its behalf — only a human can certify the DCO
 - **Says what needs no trailer.** Formatter runs, grep-swept renames, dictated changes. nixpkgs exempts deterministic tooling and rote completion explicitly; the point is that the trailer stays a signal, and a log where every commit carries one says nothing about any of them
 - **Ships a CONTRIBUTING section** to paste into a repository, and the `git log` incantations for reading disclosure back out of history
+
+## Tests
+
+```sh
+nix develop -c ./tests/check.sh
+```
+
+The interesting one enforces this skill's own rule on this skill's own repository: no session URL, no `Claude-Session:` line, in any tracked file **or any commit message** — the second half being the leak that lasts, since history is not re-read the way a file is. Beside it the gate lints the scripts and the workflow, holds `SKILL.md` to its frontmatter and to pointing at every reference it defers to, and resolves every relative link and heading anchor
+
+Each check is then made to fail on purpose: a known-bad workflow actionlint has to reject, a fixture with a dangling link and a dead anchor, and four session-link shapes planted one at a time in a throwaway repository — once in a file and once in a message. The fixture generates every id from a split prefix, so nothing it plants is committed here in a form the gate would have to refuse
 
 ## Taking it further
 
