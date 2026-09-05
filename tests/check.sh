@@ -16,7 +16,12 @@ fail() {
 
 # One source of truth for what gets linted: this list, read by nothing else
 scripts=(tests/check.sh tests/check-links.sh tests/no-session-links.sh tests/fixtures/planted-session-links.sh)
-docs=(README.md SKILL.md references/upstream-requirements.md references/contributing-template.md)
+# Two lists, because two different rules apply. Everything here is link-checked; only the
+# references have to be reachable from SKILL.md, since a reference nothing points at is
+# never loaded. Keeping them in one array and slicing it by index coupled the two rules to
+# the order of the entries, and adding a file to the front silently moved a rule onto it.
+docs=(README.md SKILL.md CHANGELOG.md)
+refs=(references/upstream-requirements.md references/contributing-template.md)
 
 echo "== the scripts parse and lint"
 for s in "${scripts[@]}"; do bash -n "$s"; done
@@ -46,13 +51,18 @@ printf '%s\n' "$front" | grep -q '^name: ai-commit-trailers$' ||
   fail "the skill's name is not what the plugin manifest and the readme call it"
 
 echo "== SKILL.md still points at the references it defers to"
-for ref in "${docs[@]:2}"; do
+for ref in "${refs[@]}"; do
   grep -qF "$(basename "$ref")" SKILL.md ||
     fail "$ref exists but SKILL.md never sends anyone to it"
 done
+# And the list is not allowed to fall behind what is actually there
+for ref in references/*; do
+  [ -e "$ref" ] || continue
+  [[ " ${refs[*]} " == *" $ref "* ]] || fail "$ref is not in the refs list, so nothing checks it"
+done
 
 echo "== every relative link in the docs resolves"
-./tests/check-links.sh "${docs[@]}"
+./tests/check-links.sh "${docs[@]}" "${refs[@]}"
 
 echo "== the link checker is able to fail"
 if ./tests/check-links.sh tests/fixtures/broken-links.md >/dev/null 2>&1; then
