@@ -4,7 +4,7 @@
 
 **Say what made the commit, and never publish under someone's name without asking (｡•̀ᴗ-)✧**
 
-![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat&logo=anthropic&logoColor=white)
+[![Agent Skill](https://img.shields.io/badge/Agent_Skill-6E56CF?style=flat)](https://agentskills.io)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 ![no dependencies](https://img.shields.io/badge/dependencies-none-3DA639?style=flat)
 [![license](https://img.shields.io/badge/MIT-3DA639?style=flat)](LICENSE)
