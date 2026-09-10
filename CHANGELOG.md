@@ -21,13 +21,13 @@ Written after the fact from the repository's history, so the entries below say w
 
 ## 2026-09-04
 
-### Removed
-
-- the two rules that were prose asking an agent to refrain from something a setting can simply not do. `attribution.commit`, `attribution.pr` and `attribution.sessionUrl` stop Claude Code from appending its byline to a commit message or a pull request body and from adding the session link at all, so carrying the same instruction in a file loaded on every relevant turn bought nothing and cost a paragraph each time. The settings that replace them are documented in the README under Install, where somebody setting a machine up will look — a one-time configuration step does not belong in the hot path an agent reads
-
 ### Changed
 
 - what stays in `SKILL.md` is what a setting cannot decide: which trailer a change deserves, what each upstream demands, and the requirement to show the user exactly what is about to be published and then wait
+
+### Removed
+
+- the two rules that were prose asking an agent to refrain from something a setting can simply not do. `attribution.commit`, `attribution.pr` and `attribution.sessionUrl` stop Claude Code from appending its byline to a commit message or a pull request body and from adding the session link at all, so carrying the same instruction in a file loaded on every relevant turn bought nothing and cost a paragraph each time. The settings that replace them are documented in the README under Install, where somebody setting a machine up will look — a one-time configuration step does not belong in the hot path an agent reads
 
 ## 2026-09-03
 

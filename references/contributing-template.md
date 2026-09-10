@@ -1,6 +1,6 @@
 # CONTRIBUTING template
 
-For a solo repo of the user's. Keep it short — a policy nobody finishes reading is not a policy. Adjust the project name and drop the second paragraph if the repo takes no outside patches yet.
+For a solo repo of the user's. Keep it short — a policy nobody finishes reading is not a policy. Adjust the project name and drop the second paragraph if the repo takes no outside patches yet
 
 ```markdown
 # Contributing

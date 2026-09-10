@@ -10,7 +10,6 @@
       "name": "ai-commit-trailers",
       "source": "./",
       "description": "Handle AI disclosure for commits and repository contributions, and require user review before publication",
-      "version": "0.1.0",
       "author": {
         "name": "rokokol"
       },
