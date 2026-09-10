@@ -8,7 +8,7 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 ![no dependencies](https://img.shields.io/badge/dependencies-none-3DA639?style=flat)
 [![license](https://img.shields.io/badge/MIT-3DA639?style=flat)](LICENSE)
-[![ci](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/ci.yml)
+[![ci](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/build.yml/badge.svg)](https://github.com/rokokol/ai-commit-trailers-skill/actions/workflows/build.yml)
 
 </div>
 

@@ -15,13 +15,7 @@ fail() {
 }
 
 # One source of truth for what gets linted: this list, read by nothing else
-scripts=(tests/check.sh tests/check-links.sh tests/no-session-links.sh tests/fixtures/planted-session-links.sh)
-# Two lists, because two different rules apply. Everything here is link-checked; only the
-# references have to be reachable from SKILL.md, since a reference nothing points at is
-# never loaded. Keeping them in one array and slicing it by index coupled the two rules to
-# the order of the entries, and adding a file to the front silently moved a rule onto it.
-docs=(README.md SKILL.md CHANGELOG.md)
-refs=(references/upstream-requirements.md references/contributing-template.md)
+scripts=(tests/check.sh tests/no-session-links.sh tests/fixtures/planted-session-links.sh check-skill.sh check-pins.sh vendor-sync.sh)
 
 echo "== the scripts parse and lint"
 for s in "${scripts[@]}"; do bash -n "$s"; done
@@ -41,33 +35,20 @@ if (cd "$bad" && actionlint .github/workflows/*.yml >/dev/null 2>&1); then
 fi
 rm -rf "$bad"
 
-echo "== SKILL.md carries the frontmatter an agent loads it by"
-head -1 SKILL.md | grep -qx -- '---' || fail "SKILL.md does not open with a frontmatter block"
-front=$(sed -n '2,/^---$/p' SKILL.md)
-for key in name description license; do
-  printf '%s\n' "$front" | grep -q "^$key:" || fail "SKILL.md frontmatter has no $key"
-done
-printf '%s\n' "$front" | grep -q '^name: ai-commit-trailers$' ||
-  fail "the skill's name is not what the plugin manifest and the readme call it"
+echo "== the vendored checkers are byte-equal to their source"
+# check-skill.sh and check-pins.sh come from the ci skill: every copy must still be the
+# blob .github/vendor.lock records, so one edited here instead of at its source fails by name
+./vendor-sync.sh check
 
-echo "== SKILL.md still points at the references it defers to"
-for ref in "${refs[@]}"; do
-  grep -qF "$(basename "$ref")" SKILL.md ||
-    fail "$ref exists but SKILL.md never sends anyone to it"
-done
-# And the list is not allowed to fall behind what is actually there
-for ref in references/*; do
-  [ -e "$ref" ] || continue
-  [[ " ${refs[*]} " == *" $ref "* ]] || fail "$ref is not in the refs list, so nothing checks it"
-done
+echo "== the workflows take no tool from a registry"
+# The ci skill's pin guard, which proves on every run that it catches each unpinned shape
+./check-pins.sh
 
-echo "== every relative link in the docs resolves"
-./tests/check-links.sh "${docs[@]}" "${refs[@]}"
-
-echo "== the link checker is able to fail"
-if ./tests/check-links.sh tests/fixtures/broken-links.md >/dev/null 2>&1; then
-  fail "tests/fixtures/broken-links.md passed the link checker — it cannot catch anything"
-fi
+echo "== SKILL.md loads, every reference is reachable, and every link and anchor resolves"
+# The one gate every skill repository shares. It finds the references itself and follows
+# SKILL.md's links to each, so there is no list here for a new reference to fall out of,
+# and it proves each check able to fail on a planted copy on every run
+./check-skill.sh -n ai-commit-trailers .
 
 echo "== no session reference in a tracked file or a commit message"
 ./tests/no-session-links.sh

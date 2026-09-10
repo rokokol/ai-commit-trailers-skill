@@ -9,8 +9,11 @@ Written after the fact from the repository's history, so the entries below say w
 ### Changed
 
 - `SKILL.md` says the trailer value is `<tool>:<model>`, so an agent in any harness names itself there rather than copying `Claude Code` from the examples, and its paragraphs end bare like the rest of the family
+- the gate runs the ci skill's `check-skill.sh` and `check-pins.sh`, vendored beside `vendor-sync.sh`, in place of its own link checker and the reference list it kept by hand; the CI workflow is `build.yml` now, and so is the badge
 
 ### Fixed
+
+- `SKILL.md` named its two references as code, not as links, so nothing an agent could follow led to them. The old gate only looked for the file name in the text and passed; the ci skill's gate follows links, and failed on the first run
 
 - no Russian triggers in the description, unlike every sibling skill. For the skill that has to fire before a "запушь" or an "открой ишью" goes out under the user's name, a miss is a publishing miss rather than a style one
 - the marketplace description still promised to "omit session links", behaviour that moved to the `attribution.*` settings on 2026-09-04

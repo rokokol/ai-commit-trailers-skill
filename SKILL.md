@@ -64,7 +64,7 @@ The two rows that get no trailer are the ones the exemptions rest on. nixpkgs ex
 
 ## What upstreams actually require
 
-nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — `references/upstream-requirements.md`. **Load it before every contribution to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic
+nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — [references/upstream-requirements.md](references/upstream-requirements.md). **Load it before every contribution to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic
 
 ## Reading the log
 
@@ -77,7 +77,7 @@ git log --invert-grep --grep='Assisted-by' --grep='Generated-by' --oneline   # t
 
 ## CONTRIBUTING template
 
-A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTING.md` — states the trailer rule, the `Co-authored-by` refusal and the review expectation in a form a contributor actually finishes reading. Full template — `references/contributing-template.md`. **Load it when writing or reviewing a repo's `CONTRIBUTING.md` or AI policy**
+A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTING.md` — states the trailer rule, the `Co-authored-by` refusal and the review expectation in a form a contributor actually finishes reading. Full template — [references/contributing-template.md](references/contributing-template.md). **Load it when writing or reviewing a repo's `CONTRIBUTING.md` or AI policy**
 
 ## Contributing to someone else's repo
 
