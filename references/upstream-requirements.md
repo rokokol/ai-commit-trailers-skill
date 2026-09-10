@@ -7,7 +7,7 @@
 | **Mesa** | Two tags by degree: `Assisted-by: TOOL (MODEL)` when AI made decisions or wrote parts, `Generated-by:` when almost all of it is generated. "Do not use the `Co-authored-by` tag as this one is reserved for human co-authors" |
 | **LLVM** | Disclosure mandatory for "substantial amounts of tool-generated content", `Assisted-by:` recommended as the form. Covers RFCs, issues and review comments, not just code |
 
-nixpkgs is the strictest of the four, so a commit shaped to satisfy it satisfies the rest. Its exemptions: deterministic editor/IDE/formatter tooling reviewed by the author, and rote LLM auto-completion of boilerplate "the author would have written anyway".
+nixpkgs is the strictest of these, so a commit shaped to satisfy it satisfies the rest. Its exemptions: deterministic editor/IDE/formatter tooling reviewed by the author, and rote LLM auto-completion of boilerplate "the author would have written anyway"
 
 **Where a project names one tag, use theirs, not ours.** nixpkgs mandates `Assisted-by` and counts nothing else, so a commit going there carries `Assisted-by (mostly)` even where it would be `Generated-by` in our own repositories. Mesa is the reverse: send them `Generated-by` when that is what it is.
 

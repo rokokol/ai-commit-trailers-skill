@@ -1,6 +1,6 @@
 ---
 name: ai-commit-trailers
-description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by."
+description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by. Triggers: commit, push, pull request, issue, PR review, comment, Assisted-by, Generated-by, Co-authored-by, Signed-off-by, закоммить, коммит, запушь, пуш, открой PR, пулреквест, открой ишью, оставь комментарий, ответь в ишью, ревью PR, смёрджи, раскрытие ИИ, подпись коммита"
 license: MIT
 ---
 

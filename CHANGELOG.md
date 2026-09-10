@@ -4,6 +4,14 @@ Kept in the shape of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), d
 
 Written after the fact from the repository's history, so the entries below say what each change did rather than reproducing the reasoning; the commit bodies carry that
 
+## 2026-09-10
+
+### Fixed
+
+- no Russian triggers in the description, unlike every sibling skill. For the skill that has to fire before a "запушь" or an "открой ишью" goes out under the user's name, a miss is a publishing miss rather than a style one
+- the marketplace description still promised to "omit session links", behaviour that moved to the `attribution.*` settings on 2026-09-04
+- counts restating the length of a list beside them: "the strictest of the four", "the four states", "four session-link shapes"
+
 ## 2026-09-04
 
 ### Removed

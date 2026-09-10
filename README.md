@@ -117,11 +117,11 @@ nix develop -c ./tests/check.sh
 
 The interesting one enforces this skill's own rule on this skill's own repository: no session URL, no `Claude-Session:` line, in any tracked file **or any commit message** — the second half being the leak that lasts, since history is not re-read the way a file is. Beside it the gate lints the scripts and the workflow, holds `SKILL.md` to its frontmatter and to pointing at every reference it defers to, and resolves every relative link and heading anchor
 
-Each check is then made to fail on purpose: a known-bad workflow actionlint has to reject, a fixture with a dangling link and a dead anchor, and four session-link shapes planted one at a time in a throwaway repository — once in a file and once in a message. The fixture generates every id from a split prefix, so nothing it plants is committed here in a form the gate would have to refuse
+Each check is then made to fail on purpose: a known-bad workflow actionlint has to reject, a fixture with a dangling link and a dead anchor, and every session-link shape planted one at a time in a throwaway repository — once in a file and once in a message. The fixture generates every id from a split prefix, so nothing it plants is committed here in a form the gate would have to refuse
 
 ## Taking it further
 
-If you disagree with the grading, the parts worth keeping are the upstream table and the exemptions — both are facts about other people's policies. Swap the four states for Mesa's plain pair, or drop degree entirely and disclose the bare fact; either still satisfies every policy quoted. Fix whichever you pick in your own `CONTRIBUTING`, because a convention that lives only in your head gets applied differently by month three
+If you disagree with the grading, the parts worth keeping are the upstream table and the exemptions — both are facts about other people's policies. Swap the graded states for Mesa's plain pair, or drop degree entirely and disclose the bare fact; either still satisfies every policy quoted. Fix whichever you pick in your own `CONTRIBUTING`, because a convention that lives only in your head gets applied differently by month three
 
 ## What it is not
 
