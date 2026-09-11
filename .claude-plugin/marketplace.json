@@ -9,7 +9,7 @@
     {
       "name": "ai-commit-trailers",
       "source": "./",
-      "description": "Handle AI disclosure for commits and repository contributions, and require user review before publication",
+      "description": "Which AI-disclosure trailer a commit carries — Generated-by, Assisted-by (mostly or partly), or none — why never Co-authored-by or Signed-off-by for an agent, what nixpkgs, the kernel, Mesa and LLVM require, and a CONTRIBUTING section on AI assistance",
       "author": {
         "name": "rokokol"
       },
@@ -22,10 +22,9 @@
         "ai-commit-trailers",
         "assisted-by",
         "generated-by",
-        "contributing",
-        "pull-requests",
-        "issues",
-        "comments"
+        "co-authored-by",
+        "signed-off-by",
+        "ai-disclosure"
       ]
     }
   ]

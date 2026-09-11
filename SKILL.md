@@ -1,24 +1,12 @@
 ---
 name: ai-commit-trailers
-description: "AI disclosure and submission safety for commits, pushes, issues, pull requests, PR reviews, comments, and discussions: Assisted-by / Generated-by trailers, upstream requirements, and mandatory user review before publishing. Use before any commit or action that publishes content as the user, when writing or reviewing a CONTRIBUTING/AI policy, before contributing to a third-party repo, when AI contribution rules are unclear, or when asked about Co-authored-by / Signed-off-by / Generated-by. Triggers: commit, push, pull request, issue, PR review, comment, Assisted-by, Generated-by, Co-authored-by, Signed-off-by, закоммить, коммит, запушь, пуш, открой PR, пулреквест, открой ишью, оставь комментарий, ответь в ишью, ревью PR, смёрджи, раскрытие ИИ, подпись коммита"
+description: "Which AI-disclosure trailer a commit carries — Generated-by, Assisted-by (mostly or partly), or none — why never Co-authored-by or Signed-off-by for an agent, what nixpkgs, the kernel, Mesa and LLVM require, and a CONTRIBUTING section on AI assistance. Use when writing, amending or rebasing a commit, or writing or reviewing a repository's AI policy. Triggers: commit, commit message, trailer, Assisted-by, Generated-by, Co-authored-by, Signed-off-by, DCO, AI disclosure, закоммить, коммит, сообщение коммита, трейлер, раскрытие ИИ, подпись коммита"
 license: MIT
 ---
 
-# AI disclosure in repository contributions
+# AI disclosure in commits
 
-For commits, the trailer answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". The safety rules below also apply to pushes, issues, pull requests, reviews, comments, discussions, and any other action performed under the user's identity. Keep the rule itself in whatever file your agent always reads; this one holds the reasoning behind it, the upstream texts it rests on, and the template
-
-## Before sending anything as the user
-
-Never push, open or update an issue or pull request, submit a review, post a comment or discussion, or perform another externally visible action under the user's identity without a final, explicit confirmation immediately before the action
-
-1. Show the user exactly what will be published, including the destination and all relevant metadata. For a push, include the ref and commits; for an issue, pull request, review, comment, or discussion, include the exact title and body as applicable
-2. Explicitly ask the user to review it personally. Do not describe tool output, tests, or an agent's review as a substitute for their own inspection
-3. Ask whether to proceed, and wait for an unambiguous approval. A request made earlier in the task is not the final approval required by this rule
-
-Do not batch approval for multiple submissions. If the content or destination changes after approval, show the revised payload and ask again
-
-Local commits are the narrow exception: apply the disclosure rules and inspect the staged diff and proposed message, but do not ask for a separate confirmation before running `git commit` when the user has requested a commit. History-rewriting actions such as `git commit --amend` or rebase require an explicit request for that action; when the user has already made that explicit request, do not ask for duplicate confirmation
+The trailer answers "what made this", as opposed to `Co-authored-by`, which answers "who to ask about it". Publishing anything under the user's name, a push included, goes through the [contributing](https://github.com/rokokol/contributing-skill) skill's gate, not this one
 
 ## The rule
 
@@ -29,17 +17,11 @@ Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is mine
 <no trailer>                                      # the user's own work, mechanical, or dictated
 ```
 
-The value is `<tool>:<model>` — the agent that made the change and the model behind it. The lines above are what Claude Code on Opus 5 writes; any other harness names itself and its model in the same place
-
-One trailer per commit. Torn between two states — take the lower one; where the case is genuinely unclear, drop the suffix and write a bare `Assisted-by`. That much is true of any commit worth arguing about, which a guessed degree is not
-
-`Generated-by` is Mesa's, for "almost all the code was generated". `(mostly)` / `(partly)` are ours: no upstream grades `Assisted-by` itself. The head of every line is what nixpkgs demands, so the suffix costs nothing where the policy is strictest
+The value is `<tool>:<model>`, the agent that made the change and the model behind it; any harness names itself there. One trailer per commit: torn between two states, take the lower one, and where the case is genuinely unclear write a bare `Assisted-by`. `Generated-by` is Mesa's, `(mostly)` and `(partly)` are ours, and the head of every line is what nixpkgs demands
 
 ## Which state
 
-The test is **whose answer a reviewer would get to "why is it done this way"** — not who typed the lines. Code is a stack of decisions: what structure, where the boundary falls, what happens on the empty input. Whoever made those made the change; typing them out is the cheap half
-
-So the diff is a rough proxy, and only for the ordinary case. Under close curation it reads as entirely mine while half the thinking was the user's, and grading by volume would call that `(mostly)` when it is nearer to no trailer at all
+The test is whose answer a reviewer would get to "why is it done this way" — not who typed the lines
 
 | The user… | State |
 |---|---|
@@ -49,36 +31,19 @@ So the diff is a rough proxy, and only for the ordinary case. Under close curati
 | dictated it, or curated so closely that nothing was left for me to decide | no trailer |
 | ran a formatter, swept a rename with grep | no trailer |
 
-**Curation in prose is steering, not dictation** — until it stops leaving me decisions. Direction, structure, approach and edge handling all specified means I transcribed rather than designed, and that is dictation at a higher altitude: no trailer, same as line-by-line
-
-**A question moves the state only if the diff moved because of it.** "What does this line do" changes nothing. "Sure that survives an empty input?" sends me checking and fixing — that is a correction phrased as a question, and it steers. Grammar is not the signal; whether the commit came out different is
-
-**Reviewing and accepting is not editing.** A change read and taken unchanged stays `Generated-by` — otherwise the tag would never apply to anything worth committing
-
-The two rows that get no trailer are the ones the exemptions rest on. nixpkgs excuses deterministic tooling and rote boilerplate in as many words; the dictation row follows the same logic rather than their letter, since a decision the user made is not assistance to disclose. Both exist so the trailer stays a signal — a log where every commit carries one says nothing about any of them
+- **Curation in prose is steering**, until it leaves the agent nothing to decide; then it is dictation
+- **A question moves the state only if the diff moved because of it**
+- **Reviewing and accepting is not editing**
 
 ## Never
 
-- **`Co-authored-by`** — a co-author is a person to go to with a question, and I am not there next session. It also fails as disclosure: nixpkgs rejects it outright, Mesa reserves the tag for humans. Under `user.email` it would also put a fake identity in the contributor graph
-- **`Signed-off-by` on my behalf** — the DCO is a legal certification only a human can make. Both the kernel and nixpkgs say so
+- **`Co-authored-by`** — a co-author is a person to ask, and the agent is not there next session; nixpkgs rejects it as disclosure and Mesa reserves it for humans
+- **`Signed-off-by` on the agent's behalf** — the DCO is a certification only a human can make
 
-## What upstreams actually require
+## What upstreams require
 
-nixpkgs, the Linux kernel, Mesa and LLVM each state their own requirement — which trailer, mandatory or recommended, what `Co-authored-by`/`Signed-off-by` exemptions exist. Full comparison table plus sources — [references/upstream-requirements.md](references/upstream-requirements.md). **Load it before every contribution to a third-party repo**, or whenever a project's own policy is unclear and you need the nixpkgs-is-strictest fallback logic
-
-## Reading the log
-
-```bash
-git log --format='%h %s%n%(trailers:key=Assisted-by,key=Generated-by)'   # what carries a trailer
-git log --grep='Generated-by' --oneline                                  # ran without the user's hand
-git log --grep='(mostly)' --oneline                                      # I wrote the bulk, they steered
-git log --invert-grep --grep='Assisted-by' --grep='Generated-by' --oneline   # the user's own work
-```
+A project's own rule wins over the convention above, and `contrib.sh repo OWNER/REPO` from the contributing skill finds its AI-policy wording. The comparison of nixpkgs, the kernel, Mesa and LLVM, and the nixpkgs form as the safe default where a project says nothing, is [references/upstream-requirements.md](references/upstream-requirements.md): **load it before a commit to someone else's repository**
 
 ## CONTRIBUTING template
 
-A short, ready-to-adapt `## AI assistance` section for a solo repo's `CONTRIBUTING.md` — states the trailer rule, the `Co-authored-by` refusal and the review expectation in a form a contributor actually finishes reading. Full template — [references/contributing-template.md](references/contributing-template.md). **Load it when writing or reviewing a repo's `CONTRIBUTING.md` or AI policy**
-
-## Contributing to someone else's repo
-
-Re-check the relevant repository policy before every commit, issue, pull request, review, comment, discussion, or other interaction. The repository's contribution and disclosure requirements override the trailer convention above, but never the requirement for the user's personal review and final approval. Check for `CONTRIBUTING.md`, `.github/CONTRIBUTING.md`, `docs/`, issue and pull request templates, and the `CODE_OF_CONDUCT`. Where a project has no policy, the nixpkgs form is the safe default for commits: it satisfies everyone who does have one
+A ready `## AI assistance` section for a repository's own `CONTRIBUTING.md` is [references/contributing-template.md](references/contributing-template.md): **load it when writing or reviewing a repository's AI policy**

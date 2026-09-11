@@ -4,6 +4,17 @@ Kept in the shape of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), d
 
 Written after the fact from the repository's history, so the entries below say what each change did rather than reproducing the reasoning; the commit bodies carry that
 
+## 2026-09-11
+
+### Removed
+
+- the rules for publishing under the user's identity — show the payload, wait for approval, never batch, the local-commit exception — and the checks before contributing to someone else's repository; both live in the [contributing](https://github.com/rokokol/contributing-skill) skill now, which extends the gate to the user's own repositories
+- the triggers for pushes, pull requests, issues, reviews and comments, which now load the contributing skill instead
+
+### Changed
+
+- `SKILL.md` is the trailer rule alone, shorter, and `git log` recipes for reading the trailers back moved to the README
+
 ## 2026-09-10
 
 ### Changed

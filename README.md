@@ -2,7 +2,7 @@
 
 # AI disclosure skill
 
-**Say what made the commit, and never publish under someone's name without asking (｡•̀ᴗ-)✧**
+**Say what made the commit, in the form the project asks for (｡•̀ᴗ-)✧**
 
 [![Agent Skill](https://img.shields.io/badge/Agent_Skill-6E56CF?style=flat)](https://agentskills.io)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
@@ -12,7 +12,7 @@
 
 </div>
 
-Teaches an agent to disclose its own share of a commit, read a repository's policy before contributing, and require the user's personal review and explicit approval before publishing under their identity — with the tool's own byline and session links switched off in settings rather than argued about in the prompt
+Teaches an agent to disclose its own share of a commit in a trailer, in the form the receiving project asks for — with the tool's own byline and session links switched off in settings rather than argued about in the prompt. Approving what gets published under your name, and reading a project's policy before contributing to it, moved to the [contributing](https://github.com/rokokol/contributing-skill) skill
 
 This is one person's convention, not a neutral survey: it says what I ask an agent to write in my repositories, and why. The upstream requirements it rests on are quoted verbatim with links, so the parts that are load-bearing are checkable and the parts that are mine are visible as mine
 
@@ -102,12 +102,20 @@ Emptying these fields removes only what the tool writes by itself. The trailer t
 
 ## What it does
 
-- **Requires approval before publication.** Before a push, issue, pull request, review, comment, discussion, or similar externally visible action, the agent shows the exact payload, asks the user to inspect it personally, and waits for explicit final approval. Local commits are exempt; amendments and other history rewrites require an explicit request
 - **Keeps session links and tool bylines out of what gets published.** Disclosure names the tool and model and nothing else; the `attribution` settings above stop Claude Code from appending a `Claude-Session:` line, a coding-session URL or a "generated with" byline to a message or a pull request body, and this repository's own gate proves none crept in
 - **Quotes what each project requires** — nixpkgs, the Linux kernel, Mesa, LLVM — with the exact wording and a link. Where a project names a tag, theirs wins over the convention above: nixpkgs counts nothing but `Assisted-by`, so a fully generated commit still goes there as `Assisted-by`
 - **Names the two absolutes.** Never `Co-authored-by` for a tool; never `Signed-off-by` on its behalf — only a human can certify the DCO
 - **Says what needs no trailer.** Formatter runs, grep-swept renames, dictated changes. nixpkgs exempts deterministic tooling and rote completion explicitly; the point is that the trailer stays a signal, and a log where every commit carries one says nothing about any of them
-- **Ships a CONTRIBUTING section** to paste into a repository, and the `git log` incantations for reading disclosure back out of history
+- **Ships a CONTRIBUTING section** to paste into a repository
+
+Reading the disclosure back out of history:
+
+```bash
+git log --format='%h %s%n%(trailers:key=Assisted-by,key=Generated-by)'   # what carries a trailer
+git log --grep='Generated-by' --oneline                                  # ran without the user's hand
+git log --grep='(mostly)' --oneline                                      # the agent wrote the bulk, the user steered
+git log --invert-grep --grep='Assisted-by' --grep='Generated-by' --oneline   # the user's own work
+```
 
 ## Tests
 
