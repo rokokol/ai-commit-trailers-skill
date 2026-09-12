@@ -11,10 +11,10 @@ The trailer answers "what made this", as opposed to `Co-authored-by`, which answ
 ## The rule
 
 ```
-Generated-by: Claude Code:claude-opus-5           # the task was carried out without the user's hand in it
-Assisted-by: Claude Code:claude-opus-5 (mostly)   # most of the final diff is mine, but they steered it
-Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is mine
-<no trailer>                                      # the user's own work, mechanical, or dictated
+Generated-by: Claude Code:<model>           # the task was carried out without the user's hand in it
+Assisted-by: Claude Code:<model> (mostly)   # most of the final diff is mine, but they steered it
+Assisted-by: Claude Code:<model> (partly)   # a substantial part is mine
+<no trailer>                                # the user's own work, mechanical, or dictated
 ```
 
 The value is `<tool>:<model>`, the agent that made the change and the model behind it; any harness names itself there. One trailer per commit: torn between two states, take the lower one, and where the case is genuinely unclear write a bare `Assisted-by`. `Generated-by` is Mesa's, `(mostly)` and `(partly)` are ours, and the head of every line is what nixpkgs demands

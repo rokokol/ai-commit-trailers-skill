@@ -4,6 +4,12 @@ Kept in the shape of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), d
 
 Written after the fact from the repository's history, so the entries below say what each change did rather than reproducing the reasoning; the commit bodies carry that
 
+## 2026-09-12
+
+### Changed
+
+- the trailer examples in SKILL.md name `<model>` rather than one pinned model id, so an agent writes the id of the model actually running
+
 ## 2026-09-11
 
 ### Removed
