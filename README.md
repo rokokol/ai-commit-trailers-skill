@@ -38,9 +38,9 @@ What those projects converged on is `Assisted-by:`, with Mesa adding `Generated-
 ## The convention
 
 ```
-Generated-by: Claude Code:claude-opus-5           # carried out without my hand in it
-Assisted-by: Claude Code:claude-opus-5 (mostly)   # most of the final diff is the agent's, I steered it
-Assisted-by: Claude Code:claude-opus-5 (partly)   # a substantial part is
+Generated-by: Claude Code:<model>           # carried out without my hand in it
+Assisted-by: Claude Code:<model> (mostly)   # most of the final diff is the agent's, I steered it
+Assisted-by: Claude Code:<model> (partly)   # a substantial part is
 <no trailer>                                      # mine, mechanical, or dictated
 ```
 

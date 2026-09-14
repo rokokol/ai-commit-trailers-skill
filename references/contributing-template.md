@@ -9,12 +9,12 @@ For a solo repo of the user's. Keep it short — a policy nobody finishes readin
 
 Parts of this repository are written with AI assistance, and that is disclosed per commit. A commit whose diff is substantially machine-written carries a trailer naming the tool and the model:
 
-    Generated-by: Claude Code:claude-opus-5
-    Assisted-by: Claude Code:claude-opus-5 (mostly)
+    Generated-by: Claude Code:<model>
+    Assisted-by: Claude Code:<model> (mostly)
 
 `Generated-by:` means the task was carried out without a hand in it — set, reviewed, accepted as it came. `Assisted-by:` means it was steered: `(mostly)` when most of the final diff came from the tool, `(partly)` when a substantial part did. Commits without a trailer are hand-written, dictated line by line, or mechanical — a formatter run, or a rename swept with grep.
 
-The same is expected of contributions. Name the tool and the model you used, in a trailer or in the pull request description. Do not use `Co-authored-by:` for a tool: it is reserved for human co-authors, and [nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), [Mesa](https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/docs/submittingpatches.rst) and the [kernel](https://docs.kernel.org/process/coding-assistants.html) all reject it as disclosure. Never sign off on a tool's behalf — only a human can certify a Developer Certificate of Origin.
+The same is expected of contributions. Name the tool and the model you used, in a trailer or in the pull request description. Do not use `Co-authored-by:` for a tool: [nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) rejects it as disclosure and [Mesa](https://docs.mesa3d.org/submittingpatches.html) reserves it for human co-authors. Never sign off on a tool's behalf — only a human can certify a Developer Certificate of Origin.
 
 Whoever opens the pull request answers for it. Review what the tool wrote, understand it, and be ready to discuss it without forwarding the questions back to the tool. Undisclosed generated code is the one thing that gets a pull request closed unread.
 
