@@ -4,6 +4,22 @@ Kept in the shape of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), d
 
 Written after the fact from the repository's history, so the entries below say what each change did rather than reproducing the reasoning; the commit bodies carry that
 
+## 2026-09-18
+
+### Removed
+
+- `references/` — the upstream comparison table and the CONTRIBUTING template. `SKILL.md` names the four projects in one line and sends the agent to read the receiving repository's own policy, which is the only one that binds a commit, rather than carrying a copy of it that goes stale unwatched
+- the repository's machinery: `tests/`, the CI workflows and their vendor lock, `flake.nix`, `.gitignore` and the vendored `check-skill.sh`, `check-pins.sh` and `vendor-sync.sh`. The skill is `SKILL.md` alone now, checked with the copy of `check-skill.sh` that lives in the skill-authoring repository; the CI badge goes with the workflow
+
+### Added
+
+- `SKILL.md` says where the trailer goes — the message's last block, with no blank line inside it, because that is all `git interpret-trailers` and `git log --format=%(trailers)` read — and how an amend and a rebase grade
+- the README records what Claude Code tells an agent for each value of `attribution.commit`, and why a graded trailer cannot live in that setting: the string is appended verbatim, while the trailer names the model that actually ran and one of four states
+
+### Changed
+
+- the description no longer advertises the upstream table or the CONTRIBUTING template, and no longer fires on writing or reviewing a repository's AI policy
+
 ## 2026-09-15
 
 ### Changed
