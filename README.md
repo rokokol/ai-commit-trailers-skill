@@ -58,7 +58,7 @@ Without `-g` it installs into the directory you are standing in — handy for a 
 Claude Code also takes it as a plugin:
 
 ```
-/plugin marketplace add rokokol/ai-commit-trailers-skill
+/plugin marketplace add rokokol/skills
 /plugin install ai-commit-trailers@rokokol-skills
 ```
 
